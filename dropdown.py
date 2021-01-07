@@ -5,13 +5,16 @@ from dash.dependencies import Input, Output
 import requests, base64
 from io import BytesIO
 
+#declare dash_app
 app = dash.Dash()
 
+#change image format to BIT (binary)
 def encode_image(image_url):
     buffered = BytesIO(requests.get(image_url).content)
     image_base64 = base64.b64encode(buffered.getvalue())
     return b'data:image/png;base64,' + image_base64
 
+#create layout in html page
 app.layout = html.Div([
     dcc.Dropdown(id='my-dropdown',
                     options=[
@@ -30,6 +33,7 @@ app.layout = html.Div([
     Output('output-container','children'),
     [Input('my-dropdown', 'value')])
 
+#encoding image (src=links)
 def update_output(value):
     JKT_img = encode_image('https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/filters:watermark(file/2017/cms/img/watermark.png,-0,0,0)/photo/2020/04/13/682906642.jpg')
     BDG_img = encode_image('https://cdn.britannica.com/88/132688-050-E9739DD9/Skyline-Jakarta-Indonesia.jpg')
