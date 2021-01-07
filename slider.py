@@ -14,6 +14,7 @@ app.layout = html.Div([
     dcc.Slider(
         id='slider-updatemode',
         marks={i: f'{i}' for i in range(20)},
+        min=0,
         max=21,
         value=2,
         step=1,
